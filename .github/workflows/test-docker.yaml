@@ -3,7 +3,7 @@ name: Testing docker
 on:
   push:
     branches:
-      - main
+      - maastro
 
 jobs:
   test-docker:
