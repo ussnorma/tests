@@ -31,7 +31,7 @@ jobs:
           SLACK_COLOR: '#006400'
           SLACK_ICON: 'https://github.com/rtCamp.png?size=48'
           SLACK_MESSAGE: 'Kubernetes manifests tested successfully!'
-          SLACK_TITLE: 'SUCCESS! All tests have passed successfully!'
+          SLACK_TITLE: 'SUCCESS! K8s tests'
           SLACK_USERNAME: rtCamp
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
@@ -43,6 +43,6 @@ jobs:
           SLACK_COLOR: '#8B0000'
           SLACK_ICON: 'https://github.com/rtCamp.png?size=48'
           SLACK_MESSAGE: 'Failure testing Kubernetes manifests'
-          SLACK_TITLE: 'FAILURE! Tests have failed!'
+          SLACK_TITLE: 'FAILURE! K8s tests'
           SLACK_USERNAME: rtCamp
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
