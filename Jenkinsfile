@@ -58,6 +58,7 @@ pipeline {
 
         stage('Deploy to pre-prod') {
             steps {
+                input message: 'Approve Deployment to pre-prod', submitter: 'jenkins'
                 sh "kubectl apply -f pre-prod.yaml --namespace pre-prod"
 
                 timeout(time: 5, unit: 'MINUTES') {
@@ -69,6 +70,7 @@ pipeline {
                         }
 
                         echo 'Deployment to pre-prod is successful'
+                        input message: 'Approve Deployment to prod', submitter: 'jenkins'
                     }
                 }
             }
