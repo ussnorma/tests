@@ -39,7 +39,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: test.myapp.myapp
+  - host: test.myapp.web-myapp
     http:
       paths:
       - path: /
