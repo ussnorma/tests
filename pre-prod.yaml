@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: "ussnorma/golang-web-app:v1"
+        image: "ussnorma/golang-web-app:v3"
         imagePullPolicy: IfNotPresent
         command: ["/app/main"]
         ports:
