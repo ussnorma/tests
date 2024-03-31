@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pre-prod
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: pre-prod
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: "ussnorma/golang-web-app:v1"
+        imagePullPolicy: IfNotPresent
+        command: ["/app/main"]
+        ports:
+        - containerPort: 3000
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  name: myapp-ingress
+  namespace: pre-prod
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: test.myapp.myapp
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: myapp
+            port:
+              number: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  namespace: pre-prod
+spec:
+  selector:
+    app: myapp
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 3000
